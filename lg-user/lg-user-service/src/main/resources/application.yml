@@ -1,0 +1,36 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:mysql://lg_mysql:3306/legou?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: lg-redis
+  rabbitmq:
+    host: my_rabbitmq
+    username: root
+    password: root
+    virtual-host: /legou
+eureka:
+  client:
+    service-url:
+      defaultZone: http://lg-registry:10086/eureka
+logging:
+  level:
+    com.leyou: debug
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      insert-strategy: not_null
+      update-strategy: not_null
+  type-aliases-package: com.leyou.user.entity
+ly:
+  encoder:
+    crypt:
+      secret: ${random.uuid} # 随机的密钥，使用uuid
+      strength: 6 # 加密强度4~31，决定盐加密时的运算强度，超过10以后加密耗时会显著增加

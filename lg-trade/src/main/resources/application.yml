@@ -1,0 +1,48 @@
+server:
+  port: 8087
+spring:
+  application:
+    name: trade-service
+  data:
+    mongodb:
+      uri: mongodb://legou:legou@192.168.42.130/carts
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://lg_mysql:3306/legou?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: root
+  rabbitmq:
+    host: my_rabbitmq
+    username: root
+    password: root
+    virtual-host: /legou
+    template:
+      retry:
+        enabled: true
+        initial-interval: 10000ms
+        max-interval: 80000ms
+        multiplier: 2
+    publisher-confirms: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://lg-registry:10086/eureka
+logging:
+  level:
+    com.legou: debug
+mybatis-plus:
+  type-aliases-package: com.legou.trade.entity
+  global-config:
+    db-config:
+      id-type: INPUT # 此处的id类型选择INPUT，代表自定义
+      insert-strategy: not_null
+      update-strategy: not_null
+  type-enums-package: com.legou.trade.entity.enums # 枚举扫描包
+lg:
+  pay:
+    wx:
+      appID: wx8397f8696b538317
+      mchID: 1473426802
+      key: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
+      notifyUrl: http://ff7hgc.natappfree.cc/trade/pay/wx/notify
+      spbillCreateIp: 192.168.42.130

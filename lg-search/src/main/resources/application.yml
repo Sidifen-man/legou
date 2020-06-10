@@ -1,0 +1,20 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: search-service
+  rabbitmq:
+    host: my_rabbitmq
+    username: root
+    password: root
+    virtual-host: /legou
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://lg-registry:10086/eureka
+logging:
+  level:
+    com.legou: debug
+elasticsearch:
+  hosts: http://legou-es:9200
